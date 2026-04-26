@@ -1,0 +1,641 @@
+/* ─── VARIÁVEIS ─── */
+:root {
+  --purple: #8b5cf6;
+  --purple-light: #a78bfa;
+  --purple-glow: rgba(139,92,246,0.35);
+  --cream: #e8d5a3;
+  --cream-dim: rgba(232,213,163,0.6);
+  --cream-faint: rgba(232,213,163,0.15);
+  --bg: #1a1225;
+  --bg2: #2d1f45;
+  --bg3: #1a2535;
+  --white: #fff;
+  --muted: rgba(232,213,163,0.45);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: linear-gradient(135deg, var(--bg) 0%, var(--bg2) 50%, var(--bg3) 100%);
+  background-attachment: fixed;
+  color: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ─── STARS BG ─── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 15% 20%, rgba(232,213,163,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 42% 8%,  rgba(232,213,163,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 72% 30%, rgba(232,213,163,0.35) 0%, transparent 100%),
+    radial-gradient(1px 1px at 88% 55%, rgba(232,213,163,0.25) 0%, transparent 100%),
+    radial-gradient(1px 1px at 30% 75%, rgba(232,213,163,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 60% 85%, rgba(232,213,163,0.2) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 5%  60%, rgba(139,92,246,0.5) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 95% 15%, rgba(139,92,246,0.4) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── BANNER ─── */
+.banner {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: hidden;
+  padding-bottom: 70px;
+}
+
+.banner-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 40% 35%;
+  filter: brightness(0.38) saturate(0.6) hue-rotate(200deg);
+  animation: zoomIn 10s ease forwards;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(1.1); }
+  to   { transform: scale(1.0); }
+}
+
+.banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(26,18,37,0.2)  0%,
+    rgba(45,31,69,0.45) 40%,
+    rgba(26,18,37,0.95) 100%
+  );
+}
+
+/* Purple glow blob */
+.banner-glow {
+  position: absolute;
+  bottom: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 300px;
+  background: radial-gradient(ellipse, rgba(139,92,246,0.22) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.banner-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 24px;
+  animation: fadeUp 1.2s ease 0.3s both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* App icon in banner */
+.banner-app-icon {
+  width: 100px;
+  height: 100px;
+  border-radius: 26px;
+  margin: 0 auto 24px;
+  overflow: hidden;
+  box-shadow: 0 0 0 2px rgba(232,213,163,0.2), 0 16px 48px rgba(139,92,246,0.5);
+  animation: iconPulse 3s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+  0%, 100% { box-shadow: 0 0 0 2px rgba(232,213,163,0.2), 0 16px 48px rgba(139,92,246,0.5); }
+  50%       { box-shadow: 0 0 0 4px rgba(232,213,163,0.35), 0 20px 60px rgba(139,92,246,0.7); }
+}
+
+.banner-app-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.banner-eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--purple-light);
+  margin-bottom: 14px;
+  font-weight: 400;
+}
+
+.banner-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 8vw, 5.5rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--white);
+  text-shadow: 0 4px 30px rgba(139,92,246,0.4);
+}
+
+.banner-title span {
+  color: var(--cream);
+  font-style: italic;
+}
+
+.banner-subtitle {
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  color: var(--muted);
+  margin-top: 14px;
+  font-weight: 300;
+  letter-spacing: 0.06em;
+}
+
+.accent-line {
+  width: 50px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--purple), transparent);
+  margin: 24px auto;
+}
+
+.banner-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, var(--purple) 0%, #6d38c7 100%);
+  color: white;
+  font-weight: 700;
+  font-size: 0.88rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 8px 28px rgba(139,92,246,0.5);
+  transition: all 0.3s ease;
+}
+
+.banner-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 40px rgba(139,92,246,0.65);
+}
+
+.banner-cta svg { width: 16px; height: 16px; fill: white; }
+
+/* ─── SECTIONS SHARED ─── */
+section { position: relative; z-index: 1; }
+
+.section-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section-eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--purple-light);
+  margin-bottom: 14px;
+  display: block;
+}
+
+.section-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.section-heading em {
+  color: var(--cream);
+  font-style: italic;
+}
+
+.section-body {
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.8;
+  font-weight: 300;
+  max-width: 540px;
+}
+
+/* ─── DOWNLOAD ─── */
+.download {
+  padding: 100px 0;
+  text-align: center;
+}
+
+.download::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 1px; height: 70px;
+  background: linear-gradient(to bottom, var(--purple), transparent);
+}
+
+.section-body.center { margin: 0 auto 50px; }
+
+/* APK card */
+.apk-card {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(45,31,69,0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(139,92,246,0.3);
+  border-radius: 24px;
+  padding: 44px 52px;
+  max-width: 440px;
+  width: 100%;
+  box-shadow: 0 24px 70px rgba(0,0,0,0.4), inset 0 1px 0 rgba(232,213,163,0.08);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.apk-card::before {
+  content: '';
+  position: absolute;
+  top: -40px; left: 50%; transform: translateX(-50%);
+  width: 200px; height: 200px;
+  background: radial-gradient(ellipse, rgba(139,92,246,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.apk-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 36px 90px rgba(0,0,0,0.5), 0 0 50px rgba(139,92,246,0.2);
+}
+
+.apk-icon-wrap {
+  width: 88px;
+  height: 88px;
+  border-radius: 22px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 32px rgba(139,92,246,0.4);
+  border: 1px solid rgba(232,213,163,0.15);
+}
+
+.apk-icon-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.apk-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.apk-version {
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+
+.apk-badges {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--cream-faint);
+  border: 1px solid rgba(232,213,163,0.2);
+  color: var(--cream);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  padding: 6px 14px;
+  border-radius: 50px;
+}
+
+.badge svg { width: 13px; height: 13px; fill: var(--cream); }
+
+.btn-download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  background: linear-gradient(135deg, var(--purple) 0%, #5b21b6 100%);
+  color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 17px 32px;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 8px 28px rgba(139,92,246,0.45);
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-download:hover {
+  background: linear-gradient(135deg, var(--purple-light) 0%, var(--purple) 100%);
+  box-shadow: 0 14px 40px rgba(139,92,246,0.65);
+  transform: scale(1.02);
+}
+
+.btn-download svg { width: 18px; height: 18px; fill: white; flex-shrink: 0; }
+
+.apk-warn {
+  margin-top: 16px;
+  font-size: 0.72rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ─── FEATURES ─── */
+.features {
+  padding: 100px 0;
+  text-align: center;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  margin-top: 52px;
+}
+
+.feat {
+  background: rgba(45,31,69,0.5);
+  border: 1px solid rgba(139,92,246,0.18);
+  border-radius: 16px;
+  padding: 34px 22px;
+  text-align: center;
+  backdrop-filter: blur(6px);
+  transition: border-color 0.3s, transform 0.3s, background 0.3s;
+}
+
+.feat:hover {
+  border-color: rgba(139,92,246,0.5);
+  background: rgba(45,31,69,0.8);
+  transform: translateY(-4px);
+}
+
+.feat-emoji {
+  font-size: 2.2rem;
+  display: block;
+  margin-bottom: 18px;
+  filter: drop-shadow(0 0 10px rgba(139,92,246,0.5));
+}
+
+.feat-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  color: var(--cream);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.feat-desc {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.75;
+  font-weight: 300;
+}
+
+/* ─── APP PREVIEW MOCKUP ─── */
+.preview-section {
+  padding: 80px 0 100px;
+  text-align: center;
+}
+
+.mockup-wrap {
+  margin-top: 50px;
+  display: inline-block;
+  position: relative;
+}
+
+.phone-frame {
+  width: 220px;
+  height: 440px;
+  background: linear-gradient(160deg, #2d1f45, #1a1225);
+  border-radius: 36px;
+  border: 2px solid rgba(139,92,246,0.4);
+  box-shadow:
+    0 40px 90px rgba(0,0,0,0.6),
+    0 0 60px rgba(139,92,246,0.2),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.phone-notch {
+  width: 70px; height: 18px;
+  background: rgba(0,0,0,0.5);
+  border-radius: 0 0 14px 14px;
+  margin: 0 auto;
+}
+
+.phone-screen {
+  flex: 1;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.phone-screen-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  color: var(--cream);
+  text-align: center;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.phone-week-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.phone-day {
+  flex: 1;
+  text-align: center;
+  font-size: 0.48rem;
+  color: var(--muted);
+  padding: 5px 2px;
+  border-radius: 6px;
+  background: rgba(139,92,246,0.08);
+  border: 1px solid rgba(139,92,246,0.15);
+}
+
+.phone-day.active {
+  background: rgba(139,92,246,0.3);
+  border-color: rgba(139,92,246,0.6);
+  color: var(--cream);
+}
+
+.phone-day span {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--cream);
+  margin-top: 2px;
+}
+
+.phone-event {
+  background: rgba(45,31,69,0.9);
+  border-left: 2px solid var(--purple);
+  border-radius: 6px;
+  padding: 7px 8px;
+}
+
+.phone-event-title {
+  font-size: 0.56rem;
+  font-weight: 700;
+  color: var(--cream);
+}
+
+.phone-event-time {
+  font-size: 0.5rem;
+  color: var(--purple-light);
+  margin-top: 2px;
+}
+
+.phone-event.alt { border-left-color: var(--cream); }
+.phone-event.alt .phone-event-time { color: var(--cream-dim); }
+
+/* ─── INSTALL STEPS ─── */
+.install {
+  padding: 100px 0;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  max-width: 580px;
+  margin: 48px auto 0;
+}
+
+.step {
+  display: flex;
+  gap: 22px;
+  align-items: flex-start;
+}
+
+.step-num {
+  flex-shrink: 0;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: rgba(139,92,246,0.15);
+  border: 1px solid rgba(139,92,246,0.5);
+  color: var(--purple-light);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.step-text {
+  padding-top: 8px;
+  font-size: 0.95rem;
+  color: var(--cream-dim);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+.step-text strong { color: var(--cream); font-weight: 700; }
+
+/* ─── FOOTER ─── */
+footer {
+  padding: 48px 20px;
+  text-align: center;
+  border-top: 1px solid rgba(139,92,246,0.18);
+  position: relative;
+  z-index: 1;
+}
+
+.footer-logo {
+  width: 80px; height: 80px;
+  border-radius: 14px;
+  overflow: hidden;
+  margin: 0 auto 16px;
+  opacity: 0.7;
+}
+
+.footer-logo img { width: 100%; height: 100%; object-fit: cover; }
+
+footer p {
+  font-size: 0.76rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  line-height: 1.8;
+}
+
+footer .dove { font-size: 1.2rem; display: block; margin-bottom: 10px; }
+
+@media (max-width: 480px) {
+  .banner {
+    min-height: 100vh;
+  }
+
+  .banner-img {
+    object-position: 12% 10%;
+    filter: brightness(0.45) saturate(0.7) hue-rotate(200deg);
+  }
+
+  .banner-title {
+    font-size: 2.4rem;
+  }
+  .download {
+  padding: 40px 0;
+  text-align: center;
+}
+.section-body.center { margin: 0 auto 25px; }
+
+.apk-card {
+  padding: 30px 22px;
+}
+
+.section-body {
+      line-height: 1.5;
+  font-size: 0.9rem;
+}
+
+.features{
+    padding: 50px 0;
+}
+
+.preview-section {
+    padding: 40px 0 60px;
+}
+.install {
+    padding: 50px 0;
+
+}
+
+}
